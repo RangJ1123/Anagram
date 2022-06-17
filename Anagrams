@@ -1,0 +1,55 @@
+import java.util.*;
+
+//Rangganatha Siregar 
+//CS 145 
+//Assignment 3 Anagram 
+//This program finds all anagram phrases that matches a given word or phrase by the user.
+    
+public class Anagrams {
+    private Set<String> dict;
+    private Set<String> result = new TreeSet<>();
+    public Set<String> words = new TreeSet<>();
+    public Anagrams(Set<String> wordBook) {
+    assert wordBook != null;
+    this.dict = wordBook;
+    }
+    public Set<String> getWords(String expression) {
+        assert expression != null;
+        LetterInventory single = new LetterInventory(expression);
+        for (String w : dict) {
+        if (single.contains(w)) {
+         words.add(w);
+            }
+        }
+        return words;
+    }
+    public void print(String expression) {
+        assert expression != null;
+        LetterInventory catalog = new LetterInventory(expression);
+          for (String a : getWords(catalog.toString())) {
+            if (catalog.contains(a)) {
+                result.add(a);
+
+        if(catalog.isEmpty()){
+        System.out.print(result);
+        result.clear();
+        } else {
+        print(catalog.toString(), 0);
+                }
+            }
+        }
+    }
+    public void print(String expression, int high) {
+        assert expression != null;
+        if (words.size() > 0 && high > 0) {
+         String bracket = "["; 
+            for (String word : words) {
+            result.add(word);
+            bracket = new StringBuilder().append(bracket).append(result).append(", ").toString();
+            result.clear();
+            }
+        } else{
+            System.out.println(words);
+        }
+    }
+}
